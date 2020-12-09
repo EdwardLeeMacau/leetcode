@@ -1,5 +1,5 @@
 CX = g++
-CFLAGS = --std=c++11 -O3
+CFLAGS = --std=c++11
 
 SRCS = $(wildcard *.cpp)
 OBJS = $(patsubst %.cpp, %.o, $(SRCS))
@@ -16,7 +16,7 @@ all: $(BIN)
 
 $(BIN): $(OBJS)
 	@echo "Building $@..."
-	@$(CX) $(CFLAGS) -pthread $^ $(addprefix -L, $(LIBDIRS)) $(addprefix -l, $(LIBS)) -o $@
+	@$(CX) $(CFLAGS) -lpthread $^ $(addprefix -L, $(LIBDIRS)) $(addprefix -l, $(LIBS)) -o $@
 
 %.o: %.cpp
 	@echo "Compiling $@..."
