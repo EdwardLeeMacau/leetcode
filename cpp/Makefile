@@ -1,5 +1,11 @@
 DIRS := $(filter-out googletest Makefile, $(wildcard *))
 
+.PHONY: default
+default: all
+
+.PHONY: all
+all:
+
 .PHONY: distclean
 distclean: clean
 
