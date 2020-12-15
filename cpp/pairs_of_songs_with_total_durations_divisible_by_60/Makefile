@@ -1,5 +1,5 @@
 CX = g++
-CFLAGS = --std=c++11
+CFLAGS = -Wall --std=c++11
 
 SRCS = $(wildcard *.cpp)
 OBJS = $(patsubst %.cpp, %.o, $(SRCS))
