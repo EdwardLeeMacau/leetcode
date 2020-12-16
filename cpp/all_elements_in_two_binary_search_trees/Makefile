@@ -1,0 +1,32 @@
+CX = g++
+CFLAGS = -Wall --std=c++11 -O3
+
+SRCS = $(wildcard *.cpp)
+OBJS = $(patsubst %.cpp, %.o, $(SRCS))
+DEPS = $(patsubst %.cpp, %.d, $(SRCS))
+
+INCDIRS = ../googletest/googletest/include ../utils
+LIBDIRS = ../googletest/build/lib ../utils
+LIBS = gtest utils
+
+BIN = unittest
+
+.PHONY: all
+all: build-lib $(BIN)
+
+.PHONY: all
+build-lib:
+	@make -C ../utils all
+
+$(BIN): $(OBJS)
+	@echo "Building $@..."
+	@$(CX) $(CFLAGS) -pthread $^ $(addprefix -L, $(LIBDIRS)) $(addprefix -l, $(LIBS)) -o $@
+
+%.o: %.cpp
+	@echo "Compiling $@..."
+	@$(CX) $(CFLAGS) -c -MMD $^ $(addprefix -I, $(INCDIRS)) -o $@ 
+
+.PHONY: clean
+clean:
+	@find . -name "*.[do]" -exec rm -rf {} \;
+	@find . -name "$(BIN)" -exec rm -rf {} \;
