@@ -5,8 +5,8 @@ SRCS = $(wildcard *.cpp)
 OBJS = $(patsubst %.cpp, %.o, $(SRCS))
 DEPS = $(patsubst %.cpp, %.d, $(SRCS))
 
-INCDIRS = ../googletest/googletest/include ../utils
-LIBDIRS = ../googletest/build/lib ../utils
+INCDIRS = ../../googletest/googletest/include ../../utils
+LIBDIRS = ../../googletest/build/lib ../../utils
 LIBS = gtest utils
 
 BIN = unittest
@@ -16,7 +16,7 @@ all: build-lib $(BIN)
 
 .PHONY: all
 build-lib:
-	@make -C ../utils all
+	@make -C ../../utils all
 
 $(BIN): $(OBJS)
 	@echo "Building $@..."
