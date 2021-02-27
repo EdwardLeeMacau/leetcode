@@ -1,4 +1,13 @@
+# Object files for C/C++
 *.o
 *.d
 *.a
+
+# Executable
 unittest
+
+# VSCode
+.vscode
+
+# Vim
+.swp
