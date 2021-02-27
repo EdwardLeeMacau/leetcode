@@ -25,14 +25,16 @@ all: primary
 
 # Define global variable lists
 
-TARGET_BINS :=
-TARGET_LIBS :=
-CLEAN_FILES :=
-CLEAN_DIRS  :=
+TARGET_BINS  :=
+TARGET_LIBS  :=
+TARGET_TESTS :=
+CLEAN_FILES  :=
+CLEAN_DIRS   :=
 
 # Subdirectories, in random order
 
-dir    := .
+root := .
+dir  := .
 
 subdir := list
 include $(subdir)/Rules.mk
@@ -41,6 +43,9 @@ subdir := matrix
 include $(subdir)/Rules.mk
 
 subdir := tree
+include $(subdir)/Rules.mk
+
+subdir := unit_test
 include $(subdir)/Rules.mk
 
 # Describe how to build libraries
@@ -59,7 +64,10 @@ CLEAN_FILES += $(TARGET_LIB_$(dir))
 # Build targets
 
 .PHONY: primary
-primary: $(TARGET_BINS) $(TARGET_LIBS)
+primary: $(TARGET_LIBS) $(TARGET_BINS)
+
+.PHONY: test
+test: $(TARGET_TESTS)
 
 .PHONY: distclean
 distclean: clean
