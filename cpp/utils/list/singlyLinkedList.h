@@ -3,6 +3,9 @@
 
 #include <cstddef>
 
+/**
+ * @score (runtime / memory) (91.26% / 85.62%)
+ */
 template <class T>
 class SinglyLinkedList
 {
@@ -76,21 +79,20 @@ public:
     /**
      * @notes For better interface design, return type T& should be changed to iterator::end.
      */
-    T& get(int index) const
+    int get(int index) const
     {
         Node *p = _head;
 
-        for (; index > 0; --index) {
+        for (; p && (index > 0); --index) {
             p = p->_next;
         }
 
-        return p->_val;
+        return p? p->_val: -1;
     }
 
     void addAtHead(const T& val)
     {
-        Node *p = new Node(_head, val);
-        _head = p;
+        _head = new Node(_head, val);
     }
 
     void addAtTail(const T& val)
@@ -109,25 +111,59 @@ public:
         p->_next = new Node(val);
     }
 
+    /**
+     * @details This method should handle 3 cases.
+     * @param[in] index    node to delete
+     * @complexity O(N), N is the index
+     * 1. Add the 0th node (_head). List member _head should be changes
+     * 2. Add the non-existing node (invalid index). Ingore this action
+     * 3. Add the other node. The previous node should be handled.
+     */
     void addAtIndex(int index, const T& val)
     {
-        // TODO
-        Node *p = _head;
+        Node *prev = _head;
+
+        // Case 1: Add to 0th node
+        if (!index) {
+            _head = new Node(_head, val);
+            return;
+        }
+
+        // Case 2: Invalid index
+        for (; prev && (index > 1); --index) {
+            prev = prev->_next;
+        }
+
+        if (index > 1) {
+            return;
+        }
+
+        // Case 3: Valid index
+        Node *cur = new Node(prev->_next, val);
+        prev->_next = cur;
     }
 
     /**
      * @details This method should handle 3 cases.
+     * @param[in] index    node to delete
+     * @complexity O(N), N is the index
      * 1. Delete the non-existing node (invalid index). Ingore this action
      * 2. Delete the 0th node (_head). List member _head should be changes
      * 3. Delete the other node. The previous node should be handled.
      */
     void deleteAtIndex(int index)
     {
-        // TODO
         Node *prev = _head;
 
+        // Case 2: Delete the 0th node (_head).
+        if (!index) {
+            _head = _head->_next;
+            delete prev;
+            return;
+        }
+
         for (; prev && (index > 1); --index) {
-            prev = _head->_next;
+            prev = prev->_next;
         }
 
         // Case 1: Delete the non-existing node (invalid index).
@@ -135,17 +171,14 @@ public:
             return;
         }
 
-        // Case 2: Delete the 0th node (_head).
-        if (prev == _head) {
-            _head = _head->_next;
-            delete prev;
-            return;
-        }
-
         // Case 3: Delete the other node.
         Node *cur = prev->_next;
-        prev->_next = cur->_next;
-        delete cur;
+        
+        if (cur) {
+            prev->_next = cur->_next;
+            delete cur;
+        }
+
         return;
     }
 

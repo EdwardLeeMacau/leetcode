@@ -7,7 +7,7 @@ CX = g++
 AR = ar
 
 ASFLAGS_ALL =
-CCFLAGS_ALL = -O3 -Wall --std=c++11
+CCFLAGS_ALL = -O3 -Wall -MMD --std=c++11
 LDFLAGS_ALL =
 
 ASFLAGS_LOCAL :=
@@ -15,7 +15,7 @@ CCFLAGS_LOCAL :=
 LDFLAGS_LOCAL :=
 
 ARCHIVE = $(AR) rcs $@ $^
-COMPILE = -c -o $@ $^ $(CCFLAGS_ALL) $(CCFLAGS_LOCAL)
+COMPILE = -c -o $@ $< $(CCFLAGS_ALL) $(CCFLAGS_LOCAL)
 LINK    = -o $@ $^ $(LDFLAGS_ALL) $(LDFLAGS_LOCAL)
 
 # Define default target
