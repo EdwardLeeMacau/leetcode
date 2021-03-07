@@ -15,6 +15,7 @@ struct ListNode
 class Solution {
 public:
     bool hasCycle(ListNode *head);
+    ListNode* reverseList(ListNode *head);
     ListNode* detectCycle(ListNode *head);
     ListNode* removeNthFromEnd(ListNode *head, int n);
 };

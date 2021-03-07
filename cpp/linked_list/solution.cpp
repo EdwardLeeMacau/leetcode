@@ -6,7 +6,7 @@
  * @time-complexity  O(N). N stand for the length of linked list
  * @space-complexity O(1).
  */
-bool Solution::hasCycle(ListNode* head) 
+bool Solution::hasCycle(ListNode *head)
 {
     ListNode *fast_p, *slow_p;
     fast_p = slow_p = head;
@@ -27,7 +27,30 @@ bool Solution::hasCycle(ListNode* head)
     return true;
 }
 
-/** 
+/**
+ * @brief
+ * @score (runtime / memory) (72.20% / 61.62%)
+ * @time-complexity  O(N). N stand for the length of linked list
+ * @space-complexity O(1).
+ */
+ListNode* Solution::reverseList(ListNode *head)
+{
+    if (!head) {
+        return NULL;
+    }
+
+    ListNode *next = head->next, *buf = NULL, *cur = head;
+
+    do {
+        next = cur->next;
+        cur->next = buf;
+        buf = cur;
+    } while ((cur = next));
+
+    return buf;
+}
+
+/**
  * @brief Maintain two pointers, one with a delay of n steps.
  * @score (runtime / memory) (32.51% / 75.53%)
  * @param[in] head    pointer to the list head
@@ -37,7 +60,7 @@ ListNode* Solution::removeNthFromEnd(ListNode *head, int n)
 {
     ListNode *fast_p, *slow_p;
     ListNode *dummy = new ListNode(0, head);
-    
+
     /** n <- n + 1 to find the previous of the target node */
     n += 1;
     fast_p = slow_p = dummy;
@@ -67,7 +90,7 @@ ListNode* Solution::removeNthFromEnd(ListNode *head, int n)
  * @time-complexity  O(N). N stand for the length of linked list
  * @space-complexity O(1).
  */
-ListNode* Solution::detectCycle(ListNode* head)
+ListNode* Solution::detectCycle(ListNode *head)
 {
     ListNode *fast_p, *slow_p;
     int loop_length = 1;
