@@ -17,6 +17,8 @@ public:
     bool hasCycle(ListNode *head);
     ListNode* reverseList(ListNode *head);
     ListNode* detectCycle(ListNode *head);
+    ListNode* oddEvenList(ListNode *head);
+    ListNode* removeElements(ListNode *head, int val);
     ListNode* removeNthFromEnd(ListNode *head, int n);
 };
 

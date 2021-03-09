@@ -51,6 +51,78 @@ ListNode* Solution::reverseList(ListNode *head)
 }
 
 /**
+ * @brief Make the linked list ordered by odd then even.
+ * Example: [1, 2, 3, 4, 5] -> [1, 3, 5, 2, 4]
+ * @details Keep tracking when we find the tail of the origin list.
+ * Delete the next pointer in the last even node when need
+ * @score (runtime / memory) (95.51% / 66.30%)
+ * @param[in] head    pointer to the list head
+ * @param[in] val     value to remove from list
+ */
+ListNode* Solution::oddEvenList(ListNode *head)
+{
+    ListNode *odd, *even, *evenHead;
+    
+    /* Case if length is equal to 0 */
+    if (!head) {
+        return NULL;
+    }
+
+    /* Case if length is larger or equal to 1 */ 
+    odd = head; 
+    even = evenHead = odd->next;
+
+    while (odd && even) {
+        if (even->next) {
+            odd->next = even->next; odd = odd->next;
+        } else {
+            break;
+        }
+
+        if (odd->next) {
+            even->next = odd->next; even = even->next;
+        } else {
+            break;
+        }
+    }
+
+    odd->next = evenHead;
+    if (even) {
+        even->next = NULL;
+    }
+
+    return head;
+}
+
+/**
+ * @brief Scan the list. Take care of cases need to delete head / tail
+ * @score (runtime / memory) (91.13% / 54.36%)
+ * @param[in] head    pointer to the list head
+ * @param[in] val     value to remove from list
+ */
+ListNode* Solution::removeElements(ListNode *head, int val)
+{
+    ListNode *cur = head, *next;
+
+    while (head && (head->val == val)) {
+        head = head->next; delete cur; cur = head;
+    }
+
+    if (!cur) {
+        return NULL;
+    }
+
+    while (cur && (next = cur->next)) {
+        while (next && (next->val == val)) {
+            cur->next = next->next; delete next; next = cur->next;
+        }
+        cur = next;
+    }
+
+    return head;
+}
+
+/**
  * @brief Maintain two pointers, one with a delay of n steps.
  * @score (runtime / memory) (32.51% / 75.53%)
  * @param[in] head    pointer to the list head
