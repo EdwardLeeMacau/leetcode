@@ -1,5 +1,6 @@
 #include "solution.h"
 
+#include <queue>
 #include <stack>
 #include <tuple>
 
@@ -75,6 +76,51 @@ int Solution::deepestLeavesSum(TreeNode* root)
 {
     int sum = 0;
     return sum;
+}
+
+/**
+ * @score (runtime / memory) (50.59% / 30.43%)
+ * @param[in] root     pointer to the tree root
+ * @param[in] val      value to insert
+ * @param[in] depth    depth to add
+ * @return Pointer to tree root
+ */
+TreeNode* addOneRow(TreeNode* root, int val, int depth)
+{
+    std::queue<TreeNode*> frontier;
+    TreeNode dummy(0, root, nullptr), *node;
+    int count, nextCount = 1;
+    
+    frontier.push(&dummy);
+
+    /* BFS traverse the tree level by level, stop at (depth - 1) */
+    for (; depth > 1; --depth) {
+        count = nextCount;
+        nextCount = 0;
+
+        for (; count; --count) {
+            node = frontier.front();
+            frontier.pop();
+            
+            if (node->left) {
+                frontier.push(node->left);
+                ++nextCount;
+            }
+
+            if (node->right) {
+                frontier.push(node->right);
+                ++nextCount;
+            }
+        }
+    }
+    
+    while (!frontier.empty()) {
+        node = frontier.front(); frontier.pop();
+        node->left = new TreeNode(val, node->left, nullptr);
+        node->right = new TreeNode(val, nullptr, node->right);
+    }
+
+    return dummy.left;
 }
 
 /**
