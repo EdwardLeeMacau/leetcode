@@ -1,22 +1,20 @@
 CX = g++
 CFLAGS = -Wall --std=c++11 -O3
 
+MAKEFLAGS = -j
+
 SRCS = $(wildcard *.cpp)
 OBJS = $(patsubst %.cpp, %.o, $(SRCS))
 DEPS = $(patsubst %.cpp, %.d, $(SRCS))
 
-INCDIRS = ../../googletest/googletest/include ../../utils
-LIBDIRS = ../../googletest/build/lib ../../utils
-LIBS = gtest utils
+INCDIRS = ../googletest/googletest/include
+LIBDIRS = ../googletest/build/lib
+LIBS = gtest
 
 BIN = unittest
 
 .PHONY: all
-all: build-lib $(BIN)
-
-.PHONY: all
-build-lib:
-	@make -C ../../utils all
+all: $(BIN)
 
 $(BIN): $(OBJS)
 	@echo "Building $@..."
