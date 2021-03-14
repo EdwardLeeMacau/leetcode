@@ -28,6 +28,37 @@ bool Solution::hasCycle(ListNode *head)
 }
 
 /**
+ * @time-complexity  O(N). N stand for the length of linked list
+ * @space-complexity O(1).
+ */
+bool Solution::isPalindrome(ListNode *head)
+{
+    ListNode dummy(0, head), *node, *second;
+    int length = 0;
+
+    node = &dummy;
+    while ((node = node->next)) {
+        ++length;
+    }
+
+    node = head;
+    length /= 2;
+    for (; length; --length) {
+        node = node->next;
+    }
+
+    second = reverseList(node->next);
+    while (node && second) {
+        if (node->val != second->val) {
+            return false;
+        }
+        node = node->next; second = second->next;
+    }
+
+    return true;
+}
+
+/**
  * @brief
  * @score (runtime / memory) (72.20% / 61.62%)
  * @time-complexity  O(N). N stand for the length of linked list
@@ -62,14 +93,14 @@ ListNode* Solution::reverseList(ListNode *head)
 ListNode* Solution::oddEvenList(ListNode *head)
 {
     ListNode *odd, *even, *evenHead;
-    
+
     /* Case if length is equal to 0 */
     if (!head) {
         return NULL;
     }
 
-    /* Case if length is larger or equal to 1 */ 
-    odd = head; 
+    /* Case if length is larger or equal to 1 */
+    odd = head;
     even = evenHead = odd->next;
 
     while (odd && even) {
@@ -92,6 +123,66 @@ ListNode* Solution::oddEvenList(ListNode *head)
     }
 
     return head;
+}
+
+/**
+ * @brief Add the numbers in 2 lists without using extra memory
+ * @score (runtime / memory) (77.70% / 98.62%)
+ * @param[in] l1, l2    pointer to the list head
+ */
+ListNode* addTwoNumbers(ListNode *l1, ListNode *l2)
+{
+    ListNode dummy1(0, l1), dummy2(0, l2);
+    int carry = 0;
+
+    l1 = &dummy1; l2 = &dummy2;
+    do {
+        l1 = l1->next; l2 = l2->next;
+
+        l1->val += l2->val + carry;
+        carry = l1->val / 10;
+        l1->val %= 10;
+    } while ((l1->next) && (l2->next));
+
+    if (l2->next) {
+        l1->next = l2->next;
+    }
+
+    while (carry && l1->next) {
+        l1 = l1->next;
+
+        l1->val += carry;
+        carry = l1->val / 10;
+        l1->val %= 10;
+    }
+
+    if (carry) {
+        l1->next = new ListNode(1, NULL);
+    }
+
+    return dummy1.next;
+}
+
+/**
+ * @brief Merge 2 ordered lists (ascending) without using any extra memory
+ * @param[in] l1, l2    pointer to the list head
+ */
+ListNode* mergeTwoLists(ListNode *l1, ListNode *l2)
+{
+    ListNode dummy(0, NULL);
+    ListNode *node = &dummy;
+
+    while (l1 && l2) {
+        if (l1->val > l2->val) {
+            node = node->next = l2; l2 = l2->next;
+        } else {
+            node = node->next = l1; l1 = l1->next;
+        }
+    }
+
+    node->next = (!l1)? l2: l1;
+
+    return dummy.next;
 }
 
 /**
