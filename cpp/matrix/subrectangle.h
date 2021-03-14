@@ -1,5 +1,5 @@
-#ifndef SOLUTION_H_
-#define SOLUTION_H_
+#ifndef SUBRECTANGLE_H_
+#define SUBRECTANGLE_H_
 
 #include <unistd.h>
 #include <vector>
@@ -7,11 +7,11 @@
 class SubrectangleQueries 
 {
 public:
-    SubrectangleQueries(std::vector<std::vector<int>>& );
+    SubrectangleQueries(std::vector<std::vector<int> >& );
     void updateSubrectangle(int row1, int col1, int row2, int col2, int newValue);
     int getValue(int row, int col);
 
-	std::vector<std::vector<int>> *rect;
+	std::vector<std::vector<int> > *rect;
 };
 
 /**
@@ -21,4 +21,4 @@ public:
  * int param_2 = obj->getValue(row,col);
  */
 
-#endif
+#endif /* !SUBRECTANBLE_H_ */

@@ -1,10 +1,10 @@
-#include "solution.h"
+#include "subrectangle.h"
 
 #include <iostream>
 
 using namespace std;
 
-SubrectangleQueries::SubrectangleQueries(vector<vector<int>>& rectangle): rect(&rectangle)
+SubrectangleQueries::SubrectangleQueries(vector<vector<int> >& rectangle): rect(&rectangle)
 {
 
 }
