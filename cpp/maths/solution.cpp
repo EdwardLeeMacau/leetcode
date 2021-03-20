@@ -1,5 +1,6 @@
 #include "solution.h"
 
+#include <stack>
 #include <unordered_map>
 
 inline int min(int a, int b)
@@ -7,7 +8,7 @@ inline int min(int a, int b)
     return (a < b)? a : b;
 }
 
-int Solution::kthFactor(int n, int k) 
+int Solution::kthFactor(int n, int k)
 {
     return 0;
 }
@@ -36,7 +37,7 @@ int Solution::distributeCandies(std::vector<int>& candyType)
     return min(size, umap.size());
 }
 
-int Solution::scoreOfParentheses(std::string S) 
+int Solution::scoreOfParentheses(std::string S)
 {
     return 0;
 }
@@ -64,6 +65,43 @@ int Solution::numPairsDivisibleBy60(std::vector<int>& time)
     }
 
     return ret;
+}
+
+/**
+ * @score (runtime / memory) (73.22% / 67.30%)
+ */
+bool canVisitAllRooms(std::vector<std::vector<int> >& rooms)
+{
+    std::vector<bool> visited(rooms.size(), false);
+    std::stack<int> frontier; /** Should replaced with a unique container */
+    std::vector<int>::iterator iter, end;
+    int room, max = rooms.size();
+
+    visited[0] = true;
+    for (iter = rooms[0].begin(), end = rooms[0].end(); iter != end; ++iter) {
+        frontier.push(*iter);
+    }
+
+    while (!frontier.empty()) {
+        room = frontier.top(); frontier.pop();
+
+        if (visited[room]) {
+            continue;
+        }
+
+        visited[room] = true;
+        for (iter = rooms[room].begin(), end = rooms[room].end(); iter != end; ++iter) {
+            frontier.push(*iter);
+        }
+    }
+
+    for (room = 0; room < max; ++room) {
+        if (!visited[room]) {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 bool Solution::increasingTriplet(std::vector<int>& nums)

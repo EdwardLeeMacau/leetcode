@@ -11,6 +11,7 @@ public:
     int distributeCandies(std::vector<int>& candyType);
     int scoreOfParentheses(std::string S);
     int numPairsDivisibleBy60(std::vector<int>& time);
+    bool canVisitAllRooms(std::vector<std::vector<int> >& rooms);
     bool increasingTriplet(std::vector<int>& nums);
     std::vector<int> sumZero(int);
     std::vector<int> findErrorNums(std::vector<int>& nums);
