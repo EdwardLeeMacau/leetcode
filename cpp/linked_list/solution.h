@@ -19,6 +19,7 @@ class Solution
 private:
     inline bool isMarked(ListNode *node);
     inline void cleanMarks(ListNode *node);
+    inline void deleteListNodes(ListNode *from, ListNode *to);
     inline ListNode* markNode(ListNode *node);
 
 public:
@@ -30,6 +31,7 @@ public:
     ListNode* addTwoNumbers(ListNode *l1, ListNode *l2);
     ListNode* mergeTwoLists(ListNode *l1, ListNode *l2);
     ListNode* removeElements(ListNode *head, int val);
+    ListNode* deleteDuplicates(ListNode *Shead);
     ListNode* removeNthFromEnd(ListNode *head, int n);
     ListNode* getIntersectionNode(ListNode *headA, ListNode *headB);
 };

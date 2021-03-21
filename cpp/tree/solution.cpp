@@ -15,13 +15,24 @@ void swap(int& a, int& b)
 }
 
 /**
+ * @brief Return the value sum of the deepest leaves
+ * @param[in] root    pointer to the tree root
+ * @return sum
+ */
+int Solution::deepestLeavesSum(TreeNode* root)
+{
+    int sum = 0;
+    return sum;
+}
+
+/**
  * @brief Verify that a binary search tree (BST) is vaild
  * @param[in] root    pointer to the tree root
  * @return Boolean, BST is vaild or not
  */
 bool Solution::isValidBST(TreeNode* root)
 {
-    stack<tuple<TreeNode*, int, int, bool, bool>> frontier;
+    stack<tuple<TreeNode*, int, int, bool, bool> > frontier;
     tuple<TreeNode*, int, int, bool, bool> tmp;
     int val, min, max;
 
@@ -68,17 +79,6 @@ bool Solution::isValidBST(TreeNode* root)
 }
 
 /**
- * @brief Return the value sum of the deepest leaves
- * @param[in] root    pointer to the tree root
- * @return sum
- */
-int Solution::deepestLeavesSum(TreeNode* root)
-{
-    int sum = 0;
-    return sum;
-}
-
-/**
  * @score (runtime / memory) (50.59% / 30.43%)
  * @param[in] root     pointer to the tree root
  * @param[in] val      value to insert
@@ -121,6 +121,38 @@ TreeNode* addOneRow(TreeNode* root, int val, int depth)
     }
 
     return dummy.left;
+}
+
+/**
+ * @score (runtime / memory) (97.92% / 96.96%)
+ */
+TreeNode* getTargetCopy(TreeNode* original, TreeNode* cloned, TreeNode* target)
+{
+    std::stack<TreeNode*> frontier_original, frontier_cloned;
+    TreeNode *node;
+
+    frontier_original.push(original);
+    frontier_cloned.push(cloned);
+
+    while (original != target) {
+        original = frontier_original.top();
+        frontier_original.pop();
+
+        cloned = frontier_cloned.top();
+        frontier_cloned.pop();
+
+        if (original->right) {
+            frontier_original.push(original->right);
+            frontier_cloned.push(cloned->right);
+        }
+
+        if (original->left) {
+            frontier_original.push(original->left);
+            frontier_cloned.push(cloned->left);
+        }
+    }
+    
+    return cloned;
 }
 
 /**

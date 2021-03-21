@@ -8,9 +8,10 @@
 class Solution
 {
 public:
-    bool isValidBST(TreeNode* root);
     int deepestLeavesSum(TreeNode* root);
+    bool isValidBST(TreeNode* root);
     TreeNode* addOneRow(TreeNode* root, int val, int depth);
+    TreeNode* getTargetCopy(TreeNode* original, TreeNode* cloned, TreeNode* target);
     std::vector<int> getAllElements(TreeNode* root1, TreeNode* root2);
 };
 

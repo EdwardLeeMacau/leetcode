@@ -295,6 +295,61 @@ ListNode* Solution::detectCycle(ListNode *head)
 }
 
 /**
+ * @param[in] from    node start to delete
+ * @param[in] to      node stop to delete (exclusive)
+ */
+inline void Solution::deleteListNodes(ListNode *from, ListNode *to)
+{
+    ListNode *node;
+
+    while ((node = from) != to) {
+        from = node->next; delete node;
+    }
+
+    return;
+}
+
+/**
+ * @brief Delete duplicated elements from a sorted singly linked list
+ * @score (runtime / memory) (84.54% / 82.40%)
+ * @time-complexity  O(N)
+ * @space-complexity O(1)
+ */
+ListNode* Solution::deleteDuplicates(ListNode* head)
+{
+    ListNode dummy(0, head), *slow_p, *fast_p;
+    int val;
+
+    slow_p = &dummy; val = slow_p->val; 
+    while ((fast_p = slow_p->next)) {
+        val = fast_p->val;
+
+        do {
+            while (fast_p->next && (val == fast_p->next->val)) {
+                fast_p = fast_p->next;
+            }
+
+            if (fast_p == slow_p->next) {
+                break;
+            }
+            
+            /** Delete the duplicates nodes */
+            fast_p = fast_p->next; deleteListNodes(slow_p->next, fast_p); slow_p->next = fast_p;
+            
+            if (!fast_p) {
+                return dummy.next;
+            }
+
+            val = fast_p->val;
+        } while (true);
+
+        slow_p = slow_p->next;
+    }
+
+    return dummy.next;
+}
+
+/**
  * @brief utils function for Solution::getIntersectionNode
  */
 inline bool Solution::isMarked(ListNode *node)
