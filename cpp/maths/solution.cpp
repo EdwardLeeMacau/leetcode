@@ -13,6 +13,27 @@ int Solution::kthFactor(int n, int k)
     return 0;
 }
 
+int Solution::findKthPositive(std::vector<int>& arr, int k)
+{
+    int start, mid, end = arr.size();
+
+    /** Check array size */
+    if (0 == end) {
+        return k;
+    }
+
+    /** If k-th missing positive is out of the array */
+    if (end + k > arr[end - 1]) {
+        return end + k;
+    }
+
+    mid = (start + end) / 2;
+    while (arr[mid - 1] > mid + k) {
+        // TODO
+    }
+    return k;
+}
+
 /**
  * @brief Learning how to use unordered_map / hashset (TODO)
  * @score (runtime / memory) (89.92% / 55.69%)

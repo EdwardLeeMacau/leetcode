@@ -8,6 +8,7 @@ class Solution
 {
 public:
     int kthFactor(int n, int k);
+    int findKthPositive(std::vector<int>& arr, int k);
     int distributeCandies(std::vector<int>& candyType);
     int scoreOfParentheses(std::string S);
     int numPairsDivisibleBy60(std::vector<int>& time);
