@@ -23,8 +23,10 @@ private:
     inline ListNode* markNode(ListNode *node);
 
 public:
+    int getDecimalValue(ListNode *head);
     bool hasCycle(ListNode *head);
     bool isPalindrome(ListNode *head);
+    ListNode* swapPairs(ListNode *head);
     ListNode* reverseList(ListNode *head);
     ListNode* detectCycle(ListNode *head);
     ListNode* oddEvenList(ListNode *head);

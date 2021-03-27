@@ -8,6 +8,7 @@ class Solution
 {
 public:
     int kthFactor(int n, int k);
+    int romanToInt(std::string s);
     int findKthPositive(std::vector<int>& arr, int k);
     int distributeCandies(std::vector<int>& candyType);
     int scoreOfParentheses(std::string S);
@@ -15,7 +16,9 @@ public:
     bool canVisitAllRooms(std::vector<std::vector<int> >& rooms);
     bool increasingTriplet(std::vector<int>& nums);
     std::vector<int> sumZero(int);
+    std::vector<int> grayCode(int n);
     std::vector<int> findErrorNums(std::vector<int>& nums);
+    std::vector<std::vector<int> > permute(std::vector<int>& nums);
 };
 
 #endif /* !SOLUTION_H_ */

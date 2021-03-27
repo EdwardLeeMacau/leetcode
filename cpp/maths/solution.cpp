@@ -1,5 +1,6 @@
 #include "solution.h"
 
+#include <algorithm>
 #include <stack>
 #include <unordered_map>
 
@@ -9,6 +10,15 @@ inline int min(int a, int b)
 }
 
 int Solution::kthFactor(int n, int k)
+{
+    return 0;
+}
+
+/**
+ * @brief skipped
+ * @score (runtime / memory) (100.00% / 86.04%)
+ */
+int romanToInt(std::string s)
 {
     return 0;
 }
@@ -181,6 +191,32 @@ std::vector<int> Solution::sumZero(int n)
 }
 
 /**
+ * @score (runtime / memory) (96.87% / 98.98%)
+ */
+std::vector<int> Solution::grayCode(int n)
+{
+    std::vector<int> seq(1 << n, 0);
+    std::vector<int>::iterator ref, iter, target, end;
+    int seg_size = (1 << 1);
+
+    seq[0] = 0;
+    seq[1] = 1;
+
+    ref = seq.begin();
+    end = seq.end();
+
+    iter = seq.begin() + seg_size;
+    while (iter != end) {
+        std::reverse_copy(ref, ref + seg_size, iter);
+        for (target = iter + seg_size; iter != target; ++iter) {
+            *iter += seg_size;
+        }
+        seg_size <<= 1;
+    }
+
+    return seq;
+}
+/**
  * @time-complexity  O(N), N stands for the length of nums
  * @space-complexity O(N), N stands for the length of nums
  */
@@ -208,3 +244,9 @@ std::vector<int> findErrorNums(std::vector<int>& nums)
 	return ans;
 }
 
+std::vector<std::vector<int> > Solution::permute(std::vector<int>& nums)
+{
+    std::vector<std::vector<int> > permutations;
+
+    return permutations;
+}

@@ -1,6 +1,22 @@
 #include "solution.h"
 
 /**
+ * @score (runtime / memory) (100.00% / 86.69%)
+ */
+int getDecimalValue(ListNode *head)
+{
+    int val = 0;
+
+    while (head) {
+        val <<= 1;
+        val += head->val;
+        head = head->next;
+    }
+
+    return 0;
+}
+
+/**
  * @brief Solved the problem by Floyd's cycle-finding algorithm.
  * @score (runtime / memory) (7.22% / 21.89%)
  * @time-complexity  O(N). N stand for the length of linked list
@@ -56,6 +72,32 @@ bool Solution::isPalindrome(ListNode *head)
     }
 
     return true;
+}
+
+/**
+ * @score (runtime / memory) (61.47% / 45.30%)
+ * @time-complexity  O(N).
+ * @space-complexity O(1).
+ */
+ListNode* swapPairs(ListNode *head)
+{
+    ListNode dummy(0, head), *prev, *next;
+
+    prev = &dummy;
+
+    while (head && (next = head->next)) {
+        // Link to the next node
+        prev->next = next;
+
+        // Reverse the node
+        head->next = next->next;
+        next->next = head;
+
+        // Move forward
+        prev = head; head = head->next;
+    }
+
+    return dummy.next;
 }
 
 /**
@@ -320,7 +362,7 @@ ListNode* Solution::deleteDuplicates(ListNode* head)
     ListNode dummy(0, head), *slow_p, *fast_p;
     int val;
 
-    slow_p = &dummy; val = slow_p->val; 
+    slow_p = &dummy; val = slow_p->val;
     while ((fast_p = slow_p->next)) {
         val = fast_p->val;
 
@@ -332,10 +374,10 @@ ListNode* Solution::deleteDuplicates(ListNode* head)
             if (fast_p == slow_p->next) {
                 break;
             }
-            
+
             /** Delete the duplicates nodes */
             fast_p = fast_p->next; deleteListNodes(slow_p->next, fast_p); slow_p->next = fast_p;
-            
+
             if (!fast_p) {
                 return dummy.next;
             }

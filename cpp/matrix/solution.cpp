@@ -60,3 +60,8 @@ int Solution::countNegatives(vector<vector<int> >& grid)
 
     return ret;
 }
+
+bool Solution::isValidSudoku(std::vector<std::vector<char> >& board)
+{
+    return false;
+}

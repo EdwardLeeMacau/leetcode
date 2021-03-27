@@ -5,6 +5,8 @@
 
 class Solution {
 public:
+    int sumOddLengthSubarrays(std::vector<int>& arr);
+    std::vector<int> shuffle(std::vector<int>& nums, int n);
     std::vector<int> sortedSquares(std::vector<int>& nums);
 };
 
