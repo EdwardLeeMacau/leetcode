@@ -3,6 +3,11 @@
 
 // C only sections
 #ifndef __cplusplus
+/**
+ * @brief Frequently used divisor.
+ */
+#define MOD 1000000007
+
 #define max(a, b) ({ \
     __typeof__ (a) _a = (a); \
     __typeof__ (b) _b = (b); \
@@ -27,6 +32,11 @@
 #ifdef __cplusplus
 
 #include <tuple>
+
+/**
+ * @brief Frequently used divisor.
+ */
+static const MOD = 1000000007;
 using Coord = std::pair<int, int>;
 using LL = long long;
 
