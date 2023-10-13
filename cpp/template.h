@@ -25,6 +25,11 @@
     _a < 0 ? -_a : _a; \
 })
 
+#define swap(a, b) ({ \
+    __typeof__(a) tmp = a; \
+    a = b; b = tmp; \
+})
+
 #typedef long long LL;
 #endif
 
